@@ -144,77 +144,93 @@ export default function Modal({ open, onClose, cfg, setCfg }: Props) {
             <div className="space-y-4 text-sm">
               <h3 className="text-lg font-semibold">Жɵндɵɵлɵр</h3>
               <p className="text-gray-700">
-                Икомат аралыктарын (минут) кол менен белгилеңиз:
+                "Икомат" убактыларын өз алдынча колдо белгилеңиз:
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <label className="flex flex-col gap-1">
                   <span>
                     Фажр:{" "}
                     <span className="text-xs text-gray-500">
-                      мин. чейин Sunrise
+                    Күн чыгыш. чейин N мүнөт
                     </span>
                   </span>
                   <input
                     type="number"
-                    min={0}
+                    min={40}
+                    max={90}
                     className="border rounded px-2 py-1"
                     value={cfg.fajr}
-                    onChange={(e) =>
-                      setCfg((c) => ({
-                        ...c,
-                        fajr: Math.max(0, parseInt(e.target.value || "0", 10)),
-                      }))
-                    }
+                    onChange={(e) => {
+                      const v = parseInt(e.target.value || "0", 10);
+                      const clamped = Math.min(
+                        90,
+                        Math.max(40, isNaN(v) ? 40 : v)
+                      );
+                      setCfg((c) => ({ ...c, fajr: clamped }));
+                    }}
                   />
                 </label>
                 <label className="flex flex-col gap-1">
                   <span>
                     Магриб:{" "}
                     <span className="text-xs text-gray-500">
-                      мин. кийин Азан
+                    Азандан кийин N мүнөт
                     </span>
                   </span>
                   <input
                     type="number"
-                    min={0}
+                    min={1}
+                    max={30}
                     className="border rounded px-2 py-1"
                     value={cfg.maghrib}
-                    onChange={(e) =>
-                      setCfg((c) => ({
-                        ...c,
-                        maghrib: Math.max(
-                          0,
-                          parseInt(e.target.value || "0", 10)
-                        ),
-                      }))
-                    }
+                    onChange={(e) => {
+                      const v = parseInt(e.target.value || "0", 10);
+                      const clamped = Math.min(
+                        30,
+                        Math.max(1, isNaN(v) ? 3 : v)
+                      );
+                      setCfg((c) => ({ ...c, maghrib: clamped }));
+                    }}
                   />
                 </label>
                 <label className="flex flex-col gap-1">
                   <span>
                     Иша:{" "}
                     <span className="text-xs text-gray-500">
-                      мин. кийин Азан
+                      Азандан кийин N мүнөт
                     </span>
                   </span>
                   <input
                     type="number"
-                    min={0}
+                    min={5}
+                    max={30}
                     className="border rounded px-2 py-1"
                     value={cfg.isha}
-                    onChange={(e) =>
-                      setCfg((c) => ({
-                        ...c,
-                        isha: Math.max(0, parseInt(e.target.value || "0", 10)),
-                      }))
-                    }
+                    onChange={(e) => {
+                      const v = parseInt(e.target.value || "0", 10);
+                      const clamped = Math.min(
+                        30,
+                        Math.max(5, isNaN(v) ? 10 : v)
+                      );
+                      setCfg((c) => ({ ...c, isha: clamped }));
+                    }}
                   />
                 </label>
               </div>
-              <p className="text-xs text-gray-500">
-                Демейки маанилер: Фажр 40 (Sunrise-40), Магриб 3 (Азан+3), Иша
-                10 (Азан+10). Маанилер localStorage'га сакталат.
-              </p>
+              <div className="text-xs text-gray-700 space-y-1">
+                <p>
+                  <b>Фажр:</b> Күн чыгышына чейин -40тан –90го чейин. Демейки (по умолчанию): -40.
+                </p>
+                <p>
+                  <b>Магриб:</b> Азандан кийин +1ден +30га чейин. Демейки (по умолчанию): +3.
+                </p>
+                <p>
+                  <b>Иша:</b> Азандан кийин +5тен +30га чейин. Демейки (по умолчанию): +10.
+                </p>
+                <p className="text-[11px] text-gray-500">
+                  Тандалган маанилер (localStorage)'те сакталат.
+                </p>
+              </div>
             </div>
           )}
         </div>
