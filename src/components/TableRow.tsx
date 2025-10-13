@@ -14,7 +14,7 @@ export default function TableRow({
   active?: boolean;
 }) {
   return (
-    <tr className={`${active ? "bg-[#99FF99]" : ""}`}>
+    <tr className={`transition-colors ${active ? "bg-[#99FF99]" : ""}`}>
       <td className="py-2 px-3 border">{name}</td>
       <td className="py-2 px-3 border text-right align-top">
         <div className="text-[18px] font-medium">{fmt24(start)}</div>

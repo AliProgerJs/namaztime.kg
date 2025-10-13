@@ -126,11 +126,13 @@ export default function App() {
       "maghrib",
       "isha",
     ] as const;
+
     const nowM = now;
     for (const k of order) {
       const t = (times as any)[k];
       if (!t?.start) continue;
       const s = t.start;
+      // используем end если есть, иначе iqama, иначе 30 мин «по умолчанию»
       const e = t.end || t.iqama || (s && s.add(30, "minute"));
       if (e && nowM.isAfter(s) && nowM.isBefore(e)) return k as string;
     }
@@ -196,58 +198,69 @@ export default function App() {
               <tbody>
                 <TableRow
                   name="Тахажжуд"
-                  start={(times as any).tahajjud.start}
-                  iqama={(times as any).tahajjud.end}
+                  start={times.tahajjud.start}
+                  iqama={times.tahajjud.end}
+                  active={currentKey === "tahajjud"}
                 />
                 <TableRow
                   name="Фаҗр"
-                  start={(times as any).fajr.start}
-                  iqama={(times as any).fajr.end}
+                  start={times.fajr.start}
+                  iqama={times.fajr.end}
+                  active={currentKey === "fajr"}
                 />
                 <TableRow
                   name="Күн чыгыш"
-                  start={(times as any).sunrise.start}
-                  iqama={(times as any).sunrise.end}
+                  start={times.sunrise.start}
+                  iqama={times.sunrise.end}
+                  active={currentKey === "sunrise"}
                 />
                 <TableRow
                   name="Ишрок"
-                  start={(times as any).ishroq.start}
-                  iqama={(times as any).ishroq.end}
+                  start={times.ishroq.start}
+                  iqama={times.ishroq.end}
+                  active={currentKey === "ishroq"}
                 />
                 <TableRow
                   name="Духа"
-                  start={(times as any).duha.start}
-                  iqama={(times as any).duha.end}
+                  start={times.duha.start}
+                  iqama={times.duha.end}
+                  active={currentKey === "duha"}
                 />
                 <TableRow
                   name="Чак түш"
-                  start={(times as any).zenith.start}
-                  iqama={(times as any).zenith.end}
+                  start={times.zenith.start}
+                  iqama={times.zenith.end}
+                  active={currentKey === "zenith"}
                 />
                 <TableRow
                   name="Зухр"
-                  start={(times as any).dhuhr.start}
-                  iqama={(times as any).dhuhr.iqama}
+                  start={times.dhuhr.start}
+                  iqama={times.dhuhr.iqama}
+                  active={currentKey === "dhuhr"}
                 />
                 <TableRow
                   name="Аср"
-                  start={(times as any).asr.start}
-                  iqama={(times as any).asr.iqama}
+                  start={times.asr.start}
+                  iqama={times.asr.iqama}
+                  active={currentKey === "asr"}
                 />
                 <TableRow
                   name="Күн батыш"
-                  start={(times as any).sunset.start}
-                  iqama={(times as any).sunset.end}
+                  start={times.sunset.start}
+                  iqama={times.sunset.end}
+                  active={currentKey === "sunset"}
                 />
                 <TableRow
                   name="Магриб"
-                  start={(times as any).maghrib.start}
-                  iqama={(times as any).maghrib.iqama}
+                  start={times.maghrib.start}
+                  iqama={times.maghrib.iqama}
+                  active={currentKey === "maghrib"}
                 />
                 <TableRow
                   name="Иша"
-                  start={(times as any).isha.start}
-                  iqama={(times as any).isha.iqama}
+                  start={times.isha.start}
+                  iqama={times.isha.iqama}
+                  active={currentKey === "isha"}
                 />
               </tbody>
             </table>
@@ -271,28 +284,33 @@ export default function App() {
               <tbody>
                 <TableRow
                   name="Фаҗр"
-                  start={(times as any).fajr.start}
-                  iqama={(times as any).fajr.iqama}
+                  start={times.fajr.start}
+                  iqama={times.fajr.iqama}
+                  active={currentKey === "fajr"}
                 />
                 <TableRow
                   name="Зухр"
-                  start={(times as any).dhuhr.start}
-                  iqama={(times as any).dhuhr.iqama}
+                  start={times.dhuhr.start}
+                  iqama={times.dhuhr.iqama}
+                  active={currentKey === "dhuhr"}
                 />
                 <TableRow
                   name="Аср"
-                  start={(times as any).asr.start}
-                  iqama={(times as any).asr.iqama}
+                  start={times.asr.start}
+                  iqama={times.asr.iqama}
+                  active={currentKey === "asr"}
                 />
                 <TableRow
                   name="Магриб"
-                  start={(times as any).maghrib.start}
-                  iqama={(times as any).maghrib.iqama}
+                  start={times.maghrib.start}
+                  iqama={times.maghrib.iqama}
+                  active={currentKey === "maghrib"}
                 />
                 <TableRow
                   name="Иша"
-                  start={(times as any).isha.start}
-                  iqama={(times as any).isha.iqama}
+                  start={times.isha.start}
+                  iqama={times.isha.iqama}
+                  active={currentKey === "isha"}
                 />
               </tbody>
             </table>
@@ -314,4 +332,3 @@ export default function App() {
     </div>
   );
 }
-
