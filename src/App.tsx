@@ -235,13 +235,13 @@ export default function App() {
                 <TableRow
                   name="Зухр"
                   start={times.dhuhr.start}
-                  iqama={times.dhuhr.iqama}
+                  iqama={times.dhuhr.end}
                   active={currentKey === "dhuhr"}
                 />
                 <TableRow
                   name="Аср"
                   start={times.asr.start}
-                  iqama={times.asr.iqama}
+                  iqama={times.asr.end}
                   active={currentKey === "asr"}
                 />
                 <TableRow
@@ -253,13 +253,13 @@ export default function App() {
                 <TableRow
                   name="Магриб"
                   start={times.maghrib.start}
-                  iqama={times.maghrib.iqama}
+                  iqama={times.maghrib.end}
                   active={currentKey === "maghrib"}
                 />
                 <TableRow
                   name="Иша"
                   start={times.isha.start}
-                  iqama={times.isha.iqama}
+                  iqama={times.isha.end}
                   active={currentKey === "isha"}
                 />
               </tbody>
