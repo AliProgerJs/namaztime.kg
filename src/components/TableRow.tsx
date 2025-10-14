@@ -17,12 +17,12 @@ export default function TableRow({
     <tr className={`transition-colors ${active ? "bg-[#99FF99]" : ""}`}>
       <td className="py-2 px-3 border">{name}</td>
       <td className="py-2 px-3 border text-right align-top">
-        <div className="text-[18px] font-medium">{fmt24(start)}</div>
-        <div className="text-[12px] text-red-600">{diffHMS(start)}</div>
+        <div className="text-[25px] font-medium">{fmt24(start)}</div>
+        <div className="text-[15px] text-red-600">{diffHMS(start)}</div>
       </td>
       <td className="py-2 px-3 border text-right align-top">
-        <div className="text-[18px] font-medium">{fmt24(iqama)}</div>
-        <div className="text-[12px] text-red-600">{diffHMS(iqama)}</div>
+        <div className="text-[25px] font-medium">{fmt24(iqama)}</div>
+        <div className="text-[15px] text-red-600">{diffHMS(iqama)}</div>
       </td>
     </tr>
   );

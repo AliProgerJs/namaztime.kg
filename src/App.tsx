@@ -94,7 +94,10 @@ export default function App() {
     const maghribEnd = isha;
 
     const ishaIqama = isha ? addMin(isha, cfg.isha) : null;
-    const ishaEnd = fajr;
+    const ishaEnd = isha ? dayjs(isha).endOf("day") : null;
+
+    // const ishaIqama = isha ? addMin(isha, cfg.isha) : null;
+    // const ishaEnd = fajr;  // Чынында аягы фажрга чейин, кантсек
 
     return {
       fajr: { start: fajr, iqama: fajrIqama, end: fajrEnd },
@@ -134,10 +137,15 @@ export default function App() {
       const s = t.start;
       // используем end если есть, иначе iqama, иначе 30 мин «по умолчанию»
       const e = t.end || t.iqama || (s && s.add(30, "minute"));
-      if (e && nowM.isAfter(s) && nowM.isBefore(e)) return k as string;
-    }
+      if (
+        e &&
+        (nowM.isAfter(s) || nowM.isSame(s)) &&
+        (nowM.isBefore(e) || nowM.isSame(e))
+      ) {
+        return k as string;
+      }    }
     return null;
-  }, [times, now]);
+  }, [times, now]); 
 
   const onToggleMode = () => {
     setMode((m) => (m === 1 ? 2 : 1));
@@ -168,20 +176,20 @@ export default function App() {
 
       <main className="max-w-4xl mx-auto p-4">
         <div className="grid grid-cols-3 items-start">
-          <div className="text-xl font-semibold text-red-600">
+          <div className="text-3xl font-semibold text-red-600">
             {now.format("DD.MM.YYYY")}
           </div>
-          <h1 className="text-3xl font-bold text-[#0000FF] text-center">
+          <h1 className="text-4xl font-bold text-[#0000FF] text-center">
             Бишкек намаз убактысы
           </h1>
-          <div className="text-right text-xl font-semibold text-red-600">
+          <div className="text-right text-3xl font-semibold text-red-600">
             {now.format("HH:mm:ss")}
           </div>
         </div>
 
         {mode === 1 ? (
           <div className="mt-4 overflow-x-auto border border-gray-400">
-            <table className="w-full border-collapse text-[18px] bg-white">
+            <table className="w-full border-collapse text-[30px] bg-white">
               <thead>
                 <tr className="bg-gray-200">
                   <th className="py-2 px-3 border text-left text-[#1d3aa5] font-bold">
@@ -203,7 +211,7 @@ export default function App() {
                   active={currentKey === "tahajjud"}
                 />
                 <TableRow
-                  name="Фаҗр"
+                  name="Фажр"
                   start={times.fajr.start}
                   iqama={times.fajr.end}
                   active={currentKey === "fajr"}
@@ -267,7 +275,7 @@ export default function App() {
           </div>
         ) : (
           <div className="mt-4 overflow-x-auto border border-gray-400">
-            <table className="w-full border-collapse text-[18px] bg-white">
+            <table className="w-full border-collapse text-[30px] bg-white">
               <thead>
                 <tr className="bg-gray-200">
                   <th className="py-2 px-3 border text-left text-[#1d3aa5] font-bold">
@@ -283,7 +291,7 @@ export default function App() {
               </thead>
               <tbody>
                 <TableRow
-                  name="Фаҗр"
+                  name="Фажр"
                   start={times.fajr.start}
                   iqama={times.fajr.iqama}
                   active={currentKey === "fajr"}
