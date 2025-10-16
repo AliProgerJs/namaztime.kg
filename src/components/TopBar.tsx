@@ -14,6 +14,11 @@ export default function TopBar({
         >
           Режимди өзгөртүү
         </button>
+
+        <h1 className="text-4xl font-bold text-[#0000FF] text-center">
+          Бишкек намаз убактысы
+        </h1>
+
         <button
           onClick={onOpenModal}
           className="px-3 py-2 rounded border bg-white shadow-sm"

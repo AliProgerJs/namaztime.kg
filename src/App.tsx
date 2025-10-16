@@ -179,10 +179,10 @@ export default function App() {
           <div className="text-3xl font-semibold text-red-600">
             {now.format("DD.MM.YYYY")}
           </div>
-          <h1 className="text-4xl font-bold text-[#0000FF] text-center">
+          {/* <h1 className="text-4xl font-bold text-[#0000FF] text-center">
             Бишкек намаз убактысы
-          </h1>
-          <div className="text-right text-3xl font-semibold text-red-600">
+          </h1> */}
+          <div className="text-right text-3xl font-semibold text-red-600 col-start-3">
             {now.format("HH:mm:ss")}
           </div>
         </div>
